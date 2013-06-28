@@ -58,7 +58,7 @@ let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
 
-" set for tab file
+" set for mapleader char
 let mapleader = ","
 
 map <unique><leader>t :tab new<CR>
@@ -89,7 +89,7 @@ map <silent><unique><leader>b <C-b>
 " set for execute last command ==> !!
 map <silent><unique><leader>. :!! <CR>
 
-" set for complier one file
+" set for complie one file
 map <unique><F5> :!g++ -g -Wall %<CR>
 map <unique><F6> :!./a.out<CR>
 map <unique><unique><F10> :Tlist <CR>
