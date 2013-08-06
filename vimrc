@@ -79,7 +79,6 @@ let mapleader = ","
 map <unique><leader>t :tab new<CR>
 map <unique><leader>n :tabn<CR>
 map <unique><leader>p :tabp<CR>
-map <unique><leader>s :tabs<CR>
 map <unique><leader>c :tabclose<CR>
 map <unique><leader>0 :tab first<CR>
 map <unique><leader>$ :tab last<CR>
@@ -90,8 +89,8 @@ map <unique><leader>! :q!<CR>
 map <unique><leader>x :wq<CR>
 map <unique><leader>a :qa<CR>
 
-map <silent><unique><leader>L :source ~/.vimrc<CR>
-map <silent><unique><leader>ee :new ~/.vimrc<CR>
+map <silent><unique><F3>L :source ~/.vimrc<CR>
+map <silent><unique><F3>E :new ~/.vimrc<CR>
 
 " open compile error window
 map <silent><unique><leader>o :copen <CR>
@@ -103,6 +102,16 @@ map <silent><unique><leader>h <C-w>h
 map <silent><unique><leader>l <C-w>l
 map <silent><unique><leader>f <C-f>
 map <silent><unique><leader>b <C-b>
+
+"set for VCScommand maps
+nmap <silent><unique><leader>D :VCSDiff<CR>
+nmap <silent><unique><leader>L :VCSLog<CR>
+nmap <silent><unique><leader>S :VCSStatus<CR>
+nmap <silent><unique><leader>A :VCSAdd<CR>
+nmap <silent><unique><leader>C :VCSCommit<CR>
+nmap <silent><unique><leader>U :VCSUpdate<CR>
+nmap <silent><unique><leader>V :VCSVimDiff<CR>
+nmap <silent><unique><leader>K :VCSLock<CR>
 
 " set for execute last command ==> !!
 map <silent><unique><leader>. :!! <CR>
