@@ -1,5 +1,5 @@
-"let $VIMRUNTIME="/home/bluezheng/third-src/vim72/runtime"
-"set runtimepath=/home/bluezheng/third-src/vim72/runtime
+"let $VIMRUNTIME="/home/ollyblue/third-src/vim72/runtime"
+"set runtimepath=/home/ollyblue/third-src/vim72/runtime
 
 
 "set t_Co=256
@@ -15,6 +15,21 @@ colorscheme desert
 syntax on
 filetype on
 filetype plugin on
+filetype plugin indent on
+set autoread
+
+" // 回车后下一行起始处自动添加 //
+" /* 回车后，下一行的起始处自动添加 *
+set fo=r 
+
+" 设置详细的帮助
+set wildmenu
+
+"高亮当前行
+"set cursorline
+
+" 设置匹配模式，如输入左括号时匹配右括号
+set showmatch
 
 " set high light search word
 set hlsearch
@@ -58,7 +73,7 @@ let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
 
-" set for mapleader char
+" set for tab file
 let mapleader = ","
 
 map <unique><leader>t :tab new<CR>
@@ -78,6 +93,9 @@ map <unique><leader>a :qa<CR>
 map <silent><unique><leader>L :source ~/.vimrc<CR>
 map <silent><unique><leader>ee :new ~/.vimrc<CR>
 
+" open compile error window
+map <silent><unique><leader>o :copen <CR>
+
 " set for move betweet the windows
 map <silent><unique><leader>j <C-w>j
 map <silent><unique><leader>k <C-w>k
@@ -89,7 +107,7 @@ map <silent><unique><leader>b <C-b>
 " set for execute last command ==> !!
 map <silent><unique><leader>. :!! <CR>
 
-" set for complie one file
+" set for complier one file
 map <unique><F5> :!g++ -g -Wall %<CR>
 map <unique><F6> :!./a.out<CR>
 map <unique><unique><F10> :Tlist <CR>
@@ -106,6 +124,8 @@ map <unique><leader>, :make <CR>
 
 "set for c++ tags
 nmap <unique><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --exclude=.svn --sort=yes
+"set for cscope databases generation
+nmap <unique><F7> :!cscope -Rbq
 "set for NERDTree:
 nmap <unique><silent><F9> :NERDTreeToggle <CR>
 "set for taglist
@@ -218,6 +238,18 @@ function! s:SaveLastSession()
 	exec 'mksession! $HOME/.vim/sessions/session.vim'
 endfunction
 
+nmap <unique><F3>s :cs find s <c-r>=expand("<cword>")<cr><cr>
+nmap <unique><F3>g :cs find g <c-r>=expand("<cword>")<cr><cr>
+nmap <unique><F3>c :cs find c <c-r>=expand("<cword>")<cr><cr>
+nmap <unique><F3>t :cs find t <c-r>=expand("<cword>")<cr><cr>
+nmap <unique><F3>e :cs find e <c-r>=expand("<cword>")<cr><cr>
+nmap <unique><F3>f :cs find f <c-r>=expand("<cfile>")<cr><cr>
+nmap <unique><F3>i :cs find i ^<c-r>=expand("<cfile>")<cr>$<cr>
+nmap <unique><F3>d :cs find d <c-r>=expand("<cword>")<cr><cr>
+
+" set for add cscope file
+cscope add /home/ollyblue/paipai/auction/cscope.out
+cscope add /home/ollyblue/paipai/comm/cscope.out
 
 " set for auto save & load views
 "autocmd BufWinLeave ?* mkview
