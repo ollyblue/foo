@@ -1,0 +1,16 @@
+
+如何查看mysql表的状态的相关SQL:
+
+查看表结构:
+desc talbe_name;
+
+查看表的状态信息：
+show table status like '表名';
+
+查看表的索引相关信息:
+show index from table_name;
+
+
+创建索引：
+1： create index index_name on table_name(col_name);
+2:  alter table table_name add index index_name (column_list)  
