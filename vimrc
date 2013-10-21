@@ -1,26 +1,27 @@
-"let $VIMRUNTIME="/home/ollyblue/third-src/vim72/runtime"
-"set runtimepath=/home/ollyblue/third-src/vim72/runtime
 
 
+" 设置vim的运行时目录
+" set runtimepath=$VIMRUNTIMEDIR
+
+" 设置vim的色彩数
 "set t_Co=256
+
 syntax enable
-"colorscheme	desert
-"set t_Co=256
-"let g:solarized_termcolors=32
-"set background=dark
-"colorscheme solarized
-" evening darkblue
-colorscheme desert
-
+colorscheme	molokai
 syntax on
 filetype on
 filetype plugin on
 filetype plugin indent on
 set autoread
+set ignorecase
+
 
 " // 回车后下一行起始处自动添加 //
 " /* 回车后，下一行的起始处自动添加 *
 set fo=r 
+
+"设置跨行移动
+set whichwrap=h,l,b,s,<,>,[,]
 
 " 设置详细的帮助
 set wildmenu
@@ -31,49 +32,60 @@ set wildmenu
 " 设置匹配模式，如输入左括号时匹配右括号
 set showmatch
 
-" set high light search word
+" 设置高亮匹配
 set hlsearch
 
-" set treat all number to be decimal number(if not 007 will treat as octal number)
+" 对待所有的数字为10进制，否则007之类的会当作8进制
 set nrformats=
 
+" 显示行号
 set nu
 
+" 设置tab
 set tabstop=4
 set sw=4
 set sts=4
 
-"set nowrap
+" 设置超长行自动换行(取消设置为 set nowrap)
 set wrap
 
-"set for tlist
-let Tlist_Show_One_File = 1 
-let Tlist_Exit_OnlyWindow = 1  
-let Tlist_Use_Right_Window = 1  
-"cs add cscope.out
-"
+" 在多少列宽度显示标尺
 set colorcolumn=100
 
-" set the indent
 set autoindent
-
-"set smartindent
 set si
 
-"
-"set for OmniCpp plugin
-set completeopt=menu,menuone
-let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
-let OmniCpp_GlobalScopeSearch=1
-let OmniCpp_DisplayMode=1
-let OmniCpp_DefaultNamespaces=["std"]
+" 多语言设置
+if has("multi_byte")
+	set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latin1
+	if v:lang =~ "^zh_CN"
+		set encoding=cp936
+		set termencoding=cp936
+		set fileencoding=cp936
+	elseif v:lang =~ "^zh_TW"
+		set encoding=big5
+		set termencoding=big5
+		set fileencoding=big5
+	elseif v:lang =~ "^ko"
+		set encoding=euc-kr
+		set termencoding=euc-kr
+		set fileencoding=euc-kr
+	elseif v:lang =~ "^ja_JP"
+		set encoding=euc-jp
+		set termencoding=euc-jp
+		set fileencoding=euc-jp
+	endif
 
-" set for tab file
+	if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+		set encoding=utf-8
+		set termencoding=utf-8
+		set fileencoding=utf-8
+	endif
+else
+	echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
+endif
+
+" map设置
 let mapleader = ","
 
 map <unique><leader>t :tab new<CR>
@@ -91,8 +103,9 @@ map <unique><leader>a :qa<CR>
 
 map <silent><unique><F3>L :source ~/.vimrc<CR>
 map <silent><unique><F3>E :new ~/.vimrc<CR>
+map <silent><unique><F3>F :echo &fileencoding<CR>
 
-" open compile error window
+" 设置打开编译错误窗口
 map <silent><unique><leader>o :copen <CR>
 
 " set for move betweet the windows
@@ -127,9 +140,11 @@ map <unique><leader>X :!./% <CR>
 
 " set for compile
 map <unique><leader>m :make <CR>
-map <unique><leader>M :make clean &&make <CR>
+map <unique><leader>M :make clean && make <CR>
 map <unique><leader>ma :make clean && make && make install <CR>
-map <unique><leader>, :make <CR>
+
+"show current directory
+map <unique><leader>P :pwd <CR>
 
 "set for c++ tags
 nmap <unique><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --exclude=.svn --sort=yes
@@ -139,64 +154,37 @@ nmap <unique><F7> :!cscope -Rbq
 nmap <unique><silent><F9> :NERDTreeToggle <CR>
 "set for taglist
 nmap <unique><silent><F8> :Tlist <CR>
-" // The switch of the Source Explorer                                         "
-"nmap <F9> :SrcExplToggle <CR>
 
-" multi-encoding setting
+"消除每行后面的空格
+map <unique><silent><F3>S :%s/\s\+$//g<CR><CR>
 
-if has("multi_byte")
-	"set bomb
-	set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latin1
-	" CJK environment detection and corresponding setting
-	if v:lang =~ "^zh_CN"
-		" Use cp936 to support GBK, euc-cn == gb2312
-		set encoding=cp936
-		set termencoding=cp936
-		set fileencoding=cp936
-	elseif v:lang =~ "^zh_TW"
-		" cp950, big5 or euc-tw
-		" Are they equal to each other?
-		set encoding=big5
-		set termencoding=big5
-		set fileencoding=big5
-	elseif v:lang =~ "^ko"
-		" Copied from someone's dotfile, untested
-		set encoding=euc-kr
-		set termencoding=euc-kr
-		set fileencoding=euc-kr
-	elseif v:lang =~ "^ja_JP"
-		" Copied from someone's dotfile, untested
-		set encoding=euc-jp
-		set termencoding=euc-jp
-		set fileencoding=euc-jp
-	endif
+"set for tlist
+let Tlist_Show_One_File = 1 
+let Tlist_Exit_OnlyWindow = 1  
+let Tlist_Use_Right_Window = 1  
 
-	" Detect UTF-8 locale, and replace CJK setting if needed
-	if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-		set encoding=utf-8
-		set termencoding=utf-8
-		set fileencoding=utf-8
-	endif
-else
-	echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
-endif
-
-"set tags=tags
-"set tags+=/data/blue/.systags
-
+"set for OmniCpp plugin
+set completeopt=menu,menuone
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype  in popup window
+let OmniCpp_GlobalScopeSearch=1
+let OmniCpp_DisplayMode=1
+let OmniCpp_DefaultNamespaces=["std"]
 
 set tags+=~/paipai/tags
 set tags+=~/paipai/auction/tags
 set tags+=~/paipai/comm/tags
 set tags+=~/paipai/b2b2c_comm/tags
 
-
 "set for local tags file in tags.vim
 "if getfsize(".tagsvim") > 0 
 "	source .tagsvim
 "endif 
 
-"                                                                              "
 " // Set the height of Source Explorer window                                  "
 let g:SrcExpl_winHeight = 8
 "                                                                              "
@@ -257,9 +245,35 @@ nmap <unique><F3>i :cs find i ^<c-r>=expand("<cfile>")<cr>$<cr>
 nmap <unique><F3>d :cs find d <c-r>=expand("<cword>")<cr><cr>
 
 " set for add cscope file
-cscope add /home/ollyblue/paipai/auction/cscope.out
-cscope add /home/ollyblue/paipai/comm/cscope.out
+cscope add /home/bluezheng/paipai/auction/cscope.out
+cscope add /home/bluezheng/paipai/comm/cscope.out
+cscope add /home/bluzheng/paipai/item/cscope.out
 
 " set for auto save & load views
 "autocmd BufWinLeave ?* mkview
 "autocmd BufWinEnter ?* loadview
+
+"set for switch on/off the paste
+function! s:PasteSwitch()
+	let s:paste_ = &paste
+	if s:paste_ == 1
+		exec 'set nopaste'
+		echomsg "set nopaste mode"
+	endif
+	if s:paste_ == 0
+		exec 'set paste'
+		echomsg "set paste mode"
+	endif
+endfunction
+
+map <unique><silent><F2> :call <SID>PasteSwitch()<CR>
+map <unique><silent><leader>r :MRU<CR>
+
+"let MRU_Use_Current_Window = 1 
+let MRU_Auto_Close=0 
+let MRU_Window_Height=4
+
+
+"  vim添加行号，也可用于替换 
+"  :let i=1
+"  :g/0/s//\=i/ |let i=i+1
