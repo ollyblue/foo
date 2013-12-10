@@ -4,7 +4,9 @@
 " set runtimepath=$VIMRUNTIMEDIR
 
 " 设置vim的色彩数
-"set t_Co=256
+set t_Co=256
+
+set shortmess+=
 
 syntax enable
 colorscheme	molokai
@@ -13,7 +15,7 @@ filetype on
 filetype plugin on
 filetype plugin indent on
 set autoread
-set ignorecase
+"set ignorecase
 
 
 " // 回车后下一行起始处自动添加 //
@@ -21,7 +23,7 @@ set ignorecase
 set fo=r 
 
 "设置跨行移动
-set whichwrap=h,l,b,s,<,>,[,]
+set whichwrap=h,l,b,s,<,>
 
 " 设置详细的帮助
 set wildmenu
@@ -55,6 +57,16 @@ set colorcolumn=100
 set autoindent
 set si
 
+" 设置高亮的开关
+function! s:ToggleHighLightSearch()
+	set hls!
+endfunction
+
+" map设置
+let mapleader = ","
+
+nmap <unique><silent><leader>H :call <SID>ToggleHighLightSearch()<CR>
+
 " 多语言设置
 if has("multi_byte")
 	set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latin1
@@ -85,8 +97,6 @@ else
 	echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
 endif
 
-" map设置
-let mapleader = ","
 
 map <unique><leader>t :tab new<CR>
 map <unique><leader>n :tabn<CR>
@@ -97,13 +107,14 @@ map <unique><leader>$ :tab last<CR>
 map <unique><leader>q :q<CR>
 map <unique><leader>w :w<CR>
 map <unique><leader>W :w!<CR>
-map <unique><leader>! :q!<CR>
+map <unique><leader>Q :q!<CR>
 map <unique><leader>x :wq<CR>
 map <unique><leader>a :qa<CR>
 
 map <silent><unique><F3>L :source ~/.vimrc<CR>
 map <silent><unique><F3>E :new ~/.vimrc<CR>
 map <silent><unique><F3>F :echo &fileencoding<CR>
+map <silent><unique><F3>% :source %<CR>
 
 " 设置打开编译错误窗口
 map <silent><unique><leader>o :copen <CR>
@@ -144,7 +155,7 @@ map <unique><leader>M :make clean && make <CR>
 map <unique><leader>ma :make clean && make && make install <CR>
 
 "show current directory
-map <unique><leader>P :pwd <CR>
+map <unique><leader>pwd :pwd <CR>
 
 "set for c++ tags
 nmap <unique><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --exclude=.svn --sort=yes
@@ -175,7 +186,7 @@ let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_DisplayMode=1
 let OmniCpp_DefaultNamespaces=["std"]
 
-set tags+=~/paipai/tags
+set tags+=~/paipai/item/tags
 set tags+=~/paipai/auction/tags
 set tags+=~/paipai/comm/tags
 set tags+=~/paipai/b2b2c_comm/tags
@@ -266,13 +277,18 @@ function! s:PasteSwitch()
 	endif
 endfunction
 
-map <unique><silent><F2> :call <SID>PasteSwitch()<CR>
+map <unique><silent><leader>P :call <SID>PasteSwitch()<CR>
 map <unique><silent><leader>r :MRU<CR>
 
 "let MRU_Use_Current_Window = 1 
 let MRU_Auto_Close=0 
 let MRU_Window_Height=4
 
+function! s:ToggleLineNumber()
+	set nu!
+endfunction
+
+nmap <unique><silent><leader>N :call <SID>ToggleLineNumber()<CR>
 
 "  vim添加行号，也可用于替换 
 "  :let i=1
