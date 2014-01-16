@@ -290,6 +290,10 @@ endfunction
 
 nmap <unique><silent><leader>N :call <SID>ToggleLineNumber()<CR>
 
+
+nmap <SPACE> 
+
 "  vim添加行号，也可用于替换 
 "  :let i=1
 "  :g/0/s//\=i/ |let i=i+1
+
