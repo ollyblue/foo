@@ -1,0 +1,49 @@
+#!/bin/bash
+
+declare -r proj_root="/home/bluezheng/paipai/"
+
+declare auction_file_list="${proj_root}auction/file.list"
+declare comm_file_list="${proj_root}comm/file.list"
+declare item_file_list="${proj_root}item/file.list"
+declare auction_dir="${proj_root}auction/"
+declare comm_dir="${proj_root}comm/"
+declare item_dir="${proj_root}item/"
+
+
+function generation_file_list()
+{
+	echo "generation file list for ${auction_file_list} ... "
+	find ${auction_dir} -name "*.cpp" -or -name "*.h" > ${auction_file_list}
+
+	
+	echo "generation file list for ${comm_file_list} ... "
+	find ${comm_dir} -name "*.cpp" -or -name "*.h" > ${comm_file_list}
+
+	echo "generation file list for ${item_file_list} ... "
+	find ${item_dir} -name "*.cpp" -or -name "*.h" > ${item_file_list}
+}
+
+function generation_cscope_db()
+{
+	echo "generation cscope db for ${auction_dir} ..."
+	cd ${auction_dir}
+	cscope -Rbkq -i ${auction_file_list}
+
+	
+	echo "generation cscope db for ${comm_dir} ..."
+	cd ${comm_dir}
+	cscope -Rbkq -i ${comm_file_list}
+
+	echo "generation cscope db for ${item_dir} ..."
+	cd ${item_dir}
+	cscope -Rbkq -i ${item_file_list}
+}
+
+function main()
+{
+	generation_file_list
+	generation_cscope_db
+}
+
+main $*
+
