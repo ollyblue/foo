@@ -28,6 +28,9 @@ set whichwrap=h,l,b,s,<,>
 " 设置详细的帮助
 set wildmenu
 
+" 忽略编译中间文件
+set wildignore=*.o,*~,*.pyc
+
 "高亮当前行
 "set cursorline
 
@@ -152,7 +155,7 @@ map <unique><leader>X :!./% <CR>
 " set for compile
 map <unique><leader>m :make <CR>
 map <unique><leader>M :make clean && make <CR>
-map <unique><leader>ma :make clean && make && make install <CR>
+map <unique><leader>I :make clean && make && make install <CR>
 
 "show current directory
 map <unique><leader>pwd :pwd <CR>
@@ -297,3 +300,7 @@ nmap <SPACE> 
 "  :let i=1
 "  :g/0/s//\=i/ |let i=i+1
 
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.paste = 'ρ'
