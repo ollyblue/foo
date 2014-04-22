@@ -198,6 +198,14 @@ set tags+=~/paipai/b2b2c_comm/tags
 "if getfsize(".tagsvim") > 0 
 "	source .tagsvim
 "endif 
+"auto load locl tags file and cscope.out
+if getfsize("./tags") > 0
+	set tags+=./tags
+endif
+
+if getfsize("./cscope.out") > 0
+	cscope add ./cscope.out
+endif
 
 " // Set the height of Source Explorer window                                  "
 let g:SrcExpl_winHeight = 8
@@ -299,4 +307,9 @@ nmap <SPACE> 
 "  vim添加行号，也可用于替换 
 "  :let i=1
 "  :g/0/s//\=i/ |let i=i+1
+"  :g/$/s//\= " = ". i . ","/ | let i=i+1
 
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.paste = 'ρ'
