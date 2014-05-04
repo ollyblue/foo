@@ -1,9 +1,9 @@
 
 
-" è®¾ç½®vimçš„è¿è¡Œæ—¶ç›®å½•
+" ÉèÖÃvimµÄÔËĞĞÊ±Ä¿Â¼
 " set runtimepath=$VIMRUNTIMEDIR
 
-" è®¾ç½®vimçš„è‰²å½©æ•°
+" ÉèÖÃvimµÄÉ«²ÊÊı
 set t_Co=256
 
 set shortmess+=
@@ -18,59 +18,59 @@ set autoread
 "set ignorecase
 
 
-" // å›è½¦åä¸‹ä¸€è¡Œèµ·å§‹å¤„è‡ªåŠ¨æ·»åŠ  //
-" /* å›è½¦åï¼Œä¸‹ä¸€è¡Œçš„èµ·å§‹å¤„è‡ªåŠ¨æ·»åŠ  *
+" // »Ø³µºóÏÂÒ»ĞĞÆğÊ¼´¦×Ô¶¯Ìí¼Ó //
+" /* »Ø³µºó£¬ÏÂÒ»ĞĞµÄÆğÊ¼´¦×Ô¶¯Ìí¼Ó *
 set fo=r 
 
-"è®¾ç½®è·¨è¡Œç§»åŠ¨
+"ÉèÖÃ¿çĞĞÒÆ¶¯
 set whichwrap=h,l,b,s,<,>
 
-" è®¾ç½®è¯¦ç»†çš„å¸®åŠ©
+" ÉèÖÃÏêÏ¸µÄ°ïÖú
 set wildmenu
 
-" å¿½ç•¥ç¼–è¯‘ä¸­é—´æ–‡ä»¶
+" ºöÂÔ±àÒëÖĞ¼äÎÄ¼ş
 set wildignore=*.o,*~,*.pyc
 
-"é«˜äº®å½“å‰è¡Œ
+"¸ßÁÁµ±Ç°ĞĞ
 "set cursorline
 
-" è®¾ç½®åŒ¹é…æ¨¡å¼ï¼Œå¦‚è¾“å…¥å·¦æ‹¬å·æ—¶åŒ¹é…å³æ‹¬å·
+" ÉèÖÃÆ¥ÅäÄ£Ê½£¬ÈçÊäÈë×óÀ¨ºÅÊ±Æ¥ÅäÓÒÀ¨ºÅ
 set showmatch
 
-" è®¾ç½®é«˜äº®åŒ¹é…
+" ÉèÖÃ¸ßÁÁÆ¥Åä
 set hlsearch
 
-" å¯¹å¾…æ‰€æœ‰çš„æ•°å­—ä¸º10è¿›åˆ¶ï¼Œå¦åˆ™007ä¹‹ç±»çš„ä¼šå½“ä½œ8è¿›åˆ¶
+" ¶Ô´ıËùÓĞµÄÊı×ÖÎª10½øÖÆ£¬·ñÔò007Ö®ÀàµÄ»áµ±×÷8½øÖÆ
 set nrformats=
 
-" æ˜¾ç¤ºè¡Œå·
+" ÏÔÊ¾ĞĞºÅ
 set nu
 
-" è®¾ç½®tab
+" ÉèÖÃtab
 set tabstop=4
 set sw=4
 set sts=4
 
-" è®¾ç½®è¶…é•¿è¡Œè‡ªåŠ¨æ¢è¡Œ(å–æ¶ˆè®¾ç½®ä¸º set nowrap)
+" ÉèÖÃ³¬³¤ĞĞ×Ô¶¯»»ĞĞ(È¡ÏûÉèÖÃÎª set nowrap)
 set wrap
 
-" åœ¨å¤šå°‘åˆ—å®½åº¦æ˜¾ç¤ºæ ‡å°º
+" ÔÚ¶àÉÙÁĞ¿í¶ÈÏÔÊ¾±ê³ß
 set colorcolumn=100
 
 set autoindent
 set si
 
-" è®¾ç½®é«˜äº®çš„å¼€å…³
+" ÉèÖÃ¸ßÁÁµÄ¿ª¹Ø
 function! s:ToggleHighLightSearch()
 	set hls!
 endfunction
 
-" mapè®¾ç½®
+" mapÉèÖÃ
 let mapleader = ","
 
 nmap <unique><silent><leader>H :call <SID>ToggleHighLightSearch()<CR>
 
-" å¤šè¯­è¨€è®¾ç½®
+" ¶àÓïÑÔÉèÖÃ
 if has("multi_byte")
 	set fileencodings=ucs-bom,utf-8,cp936,big5,euc-jp,euc-kr,latin1
 	if v:lang =~ "^zh_CN"
@@ -114,12 +114,20 @@ map <unique><leader>Q :q!<CR>
 map <unique><leader>x :wq<CR>
 map <unique><leader>a :qa<CR>
 
-map <silent><unique><F3>L :source ~/.vimrc<CR>
-map <silent><unique><F3>E :new ~/.vimrc<CR>
+if has("gui_running")
+	set lines=40 columns=120
+	set guioptions -=T
+	set guioptions -=m
+	map <silent><unique><F3>L :source $VIM/_vimrc<CR>
+	map <silent><unique><F3>E :new $VIM/_vimrc<CR>
+else
+	map <silent><unique><F3>L :source ~/.vimrc<CR>
+	map <silent><unique><F3>E :new ~/.vimrc<CR>
+endif
 map <silent><unique><F3>F :echo &fileencoding<CR>
 map <silent><unique><F3>% :source %<CR>
 
-" è®¾ç½®æ‰“å¼€ç¼–è¯‘é”™è¯¯çª—å£
+" ÉèÖÃ´ò¿ª±àÒë´íÎó´°¿Ú
 map <silent><unique><leader>o :copen <CR>
 
 " set for move betweet the windows
@@ -169,7 +177,7 @@ nmap <unique><silent><F9> :NERDTreeToggle <CR>
 "set for taglist
 nmap <unique><silent><F8> :Tlist <CR>
 
-"æ¶ˆé™¤æ¯è¡Œåé¢çš„ç©ºæ ¼
+"Ïû³ıÃ¿ĞĞºóÃæµÄ¿Õ¸ñ
 map <unique><silent><F3>S :%s/\s\+$//g<CR><CR>
 
 "set for tlist
@@ -296,11 +304,11 @@ nmap <unique><silent><leader>N :call <SID>ToggleLineNumber()<CR>
 
 nmap <SPACE> 
 
-"  vimæ·»åŠ è¡Œå·ï¼Œä¹Ÿå¯ç”¨äºæ›¿æ¢ 
+"  vimÌí¼ÓĞĞºÅ£¬Ò²¿ÉÓÃÓÚÌæ»» 
 "  :let i=1
 "  :g/0/s//\=i/ |let i=i+1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-let g:airline_symbols.paste = 'Ï'
+let g:airline_symbols.paste = '¦Ñ'
