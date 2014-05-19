@@ -16,7 +16,7 @@ all:$(TARGET)
 %.o:%.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $^
 	
-# 编译多个可执行文件
+# compile one more target
 #.cpp:
 #	$(CXX) (CPPFLAGS) $(INCLUDE) -o $@ $^ $(LIB)
 
