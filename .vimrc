@@ -311,6 +311,15 @@ nmap <SPACE> 
 "  :g/$/s//\= " = ". i . ","/ | let i=i+1
 "  vim生成连续的数字
 "“ let i=670676 | g/^/s//\=i . " " / | let i=i+1
+" 在脚本中执行的代码片段:
+"  let j = 10                                                                                             
+"  while j < 100                                                                                          
+"    exec 'normal! i' . j . nr2char(13)                                                                 
+"    let j = j + 1                                                                                      
+"  endwhile
+"
+" 直接在命令模式中执行的代码片段: let j=10 | while j < 100 |  exec 'normal! i' . j . nr2char(13)  | let j=j+1 | endwhile
+
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
