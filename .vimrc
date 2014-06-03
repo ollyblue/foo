@@ -10,6 +10,7 @@ set shortmess+=
 
 syntax enable
 colorscheme	molokai
+"colorscheme darkburn
 syntax on
 filetype on
 filetype plugin on
@@ -308,6 +309,8 @@ nmap <SPACE> 
 "  :let i=1
 "  :g/0/s//\=i/ |let i=i+1
 "  :g/$/s//\= " = ". i . ","/ | let i=i+1
+"  vim生成连续的数字
+"“ let i=670676 | g/^/s//\=i . " " / | let i=i+1
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
