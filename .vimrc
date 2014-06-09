@@ -6,18 +6,26 @@
 " 设置vim的色彩数
 set t_Co=256
 
+"设置vim提示为简短提示，例如[readonly]用[RO]来代替,[w]替代[written]
 set shortmess+=
 
-syntax enable
+"风格
 colorscheme	molokai
-"colorscheme darkburn
+
+"开启语法高亮
+syntax enable
 syntax on
+
+"开启文件类型检查，和文件类型插件
 filetype on
 filetype plugin on
 filetype plugin indent on
-set autoread
-"set ignorecase
 
+"文件有改变，自动读取到当前buffer
+set autoread
+
+"查找时，是否忽略大小写
+"set ignorecase
 
 " // 回车后下一行起始处自动添加 //
 " /* 回车后，下一行的起始处自动添加 *
@@ -61,6 +69,7 @@ set wrap
 " 在多少列宽度显示标尺
 set colorcolumn=100
 
+"设置自动对齐
 set autoindent
 set si
 
@@ -69,10 +78,6 @@ function! s:ToggleHighLightSearch()
 	set hls!
 endfunction
 
-" map设置
-let mapleader = ","
-
-nmap <unique><silent><leader>H :call <SID>ToggleHighLightSearch()<CR>
 
 " 多语言设置
 if has("multi_byte")
@@ -104,13 +109,21 @@ else
 	echoerr "Sorry, this version of (g)vim was not compiled with multi_byte"
 endif
 
+" map设置
+let mapleader = ","
 
+"开关高亮设置
+nmap <unique><silent><leader>H :call <SID>ToggleHighLightSearch()<CR>
+
+"tab 相关的map键映射
 map <unique><leader>t :tab new<CR>
 map <unique><leader>n :tabn<CR>
 map <unique><leader>p :tabp<CR>
 map <unique><leader>c :tabclose<CR>
 map <unique><leader>0 :tab first<CR>
 map <unique><leader>$ :tab last<CR>
+
+"保存，退出相关键映射
 map <unique><leader>q :q<CR>
 map <unique><leader>w :w<CR>
 map <unique><leader>W :w!<CR>
@@ -118,15 +131,24 @@ map <unique><leader>Q :q!<CR>
 map <unique><leader>x :wq<CR>
 map <unique><leader>a :qa<CR>
 
-map <silent><unique><F3>L :source ~/.vimrc<CR>
-map <silent><unique><F3>E :new ~/.vimrc<CR>
+if has("gui_running")
+	set lines=40 columns=120
+	set guioptions -=T
+	set guioptions -=m
+	map <silent><unique><F3>L :source $VIM/_vimrc<CR>
+	map <silent><unique><F3>E :new $VIM/_vimrc<CR>
+else
+	map <silent><unique><F3>L :source ~/.vimrc<CR>
+	map <silent><unique><F3>E :new ~/.vimrc<CR>
+endif
+
 map <silent><unique><F3>F :echo &fileencoding<CR>
 map <silent><unique><F3>% :source %<CR>
 
 " 设置打开编译错误窗口
 map <silent><unique><leader>o :copen <CR>
 
-" set for move betweet the windows
+"设置移动窗口键映射
 map <silent><unique><leader>j <C-w>j
 map <silent><unique><leader>k <C-w>k
 map <silent><unique><leader>h <C-w>h
@@ -134,7 +156,7 @@ map <silent><unique><leader>l <C-w>l
 map <silent><unique><leader>f <C-f>
 map <silent><unique><leader>b <C-b>
 
-"set for VCScommand maps
+"设置svn
 nmap <silent><unique><leader>D :VCSDiff<CR>
 nmap <silent><unique><leader>L :VCSLog<CR>
 nmap <silent><unique><leader>S :VCSStatus<CR>
@@ -144,44 +166,44 @@ nmap <silent><unique><leader>U :VCSUpdate<CR>
 nmap <silent><unique><leader>V :VCSVimDiff<CR>
 nmap <silent><unique><leader>K :VCSLock<CR>
 
-" set for execute last command ==> !!
+"执行上次的命令
 map <silent><unique><leader>. :!! <CR>
 
-" set for complier one file
+"一键编译文件
 map <unique><F5> :!g++ -g -Wall %<CR>
 map <unique><F6> :!./a.out<CR>
+
 map <unique><unique><F10> :Tlist <CR>
 
-" set for execute shell script
-map <unique><leader>+x :!chmod +x %<CR>
-map <unique><leader>X :!./% <CR>
+"执行脚本
+map <unique><leader>X :!chmod +x % && ./% <CR>
 
-" set for compile
+"设置使用makefile编译
 map <unique><leader>m :make <CR>
 map <unique><leader>M :make clean && make <CR>
 map <unique><leader>I :make clean && make && make install <CR>
 
-"show current directory
-map <unique><leader>pwd :pwd <CR>
-
-"set for c++ tags
+"设置C++的tags
 nmap <unique><F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --exclude=.svn --sort=yes
-"set for cscope databases generation
+
+"设置生成cscope的db
 nmap <unique><F7> :!cscope -Rbq
-"set for NERDTree:
+
+"打开NERDTree
 nmap <unique><silent><F9> :NERDTreeToggle <CR>
-"set for taglist
+
+"打开taglist窗口
 nmap <unique><silent><F8> :Tlist <CR>
 
 "消除每行后面的空格
 map <unique><silent><F3>S :%s/\s\+$//g<CR><CR>
 
-"set for tlist
+"设置taglist窗口布局
 let Tlist_Show_One_File = 1 
 let Tlist_Exit_OnlyWindow = 1  
 let Tlist_Use_Right_Window = 1  
 
-"set for OmniCpp plugin
+"设置Omni自动实例选项
 set completeopt=menu,menuone
 let OmniCpp_MayCompleteDot = 1 " autocomplete with .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
@@ -198,10 +220,16 @@ set tags+=~/paipai/auction/tags
 set tags+=~/paipai/comm/tags
 set tags+=~/paipai/b2b2c_comm/tags
 
+" set for add cscope file
+cscope add /home/bluezheng/paipai/auction/cscope.out
+cscope add /home/bluezheng/paipai/comm/cscope.out
+cscope add /home/bluzheng/paipai/item/cscope.out
+
 "set for local tags file in tags.vim
 "if getfsize(".tagsvim") > 0 
 "	source .tagsvim
 "endif 
+
 "auto load locl tags file and cscope.out
 if getfsize("./tags") > 0
 	set tags+=./tags
@@ -270,10 +298,6 @@ nmap <unique><F3>f :cs find f <c-r>=expand("<cfile>")<cr><cr>
 nmap <unique><F3>i :cs find i ^<c-r>=expand("<cfile>")<cr>$<cr>
 nmap <unique><F3>d :cs find d <c-r>=expand("<cword>")<cr><cr>
 
-" set for add cscope file
-cscope add /home/bluezheng/paipai/auction/cscope.out
-cscope add /home/bluezheng/paipai/comm/cscope.out
-cscope add /home/bluzheng/paipai/item/cscope.out
 
 " set for auto save & load views
 "autocmd BufWinLeave ?* mkview
