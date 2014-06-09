@@ -33,7 +33,10 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 
 "高亮当前行
-"set cursorline
+set cursorline
+
+"高亮当前列
+set cursorcolumn
 
 " 设置匹配模式，如输入左括号时匹配右括号
 set showmatch
