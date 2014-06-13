@@ -352,3 +352,8 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.paste = 'ρ'
+
+" 添加的protobuf IDL 语法高亮ftdetect
+augroup filetype
+	au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end
