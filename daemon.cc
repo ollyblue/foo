@@ -5,6 +5,7 @@ int daemon()
     if((pid = fork()) != 0)
     {
         exit(0);
+    }
 
         setsid();
 
