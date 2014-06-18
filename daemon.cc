@@ -5,10 +5,10 @@ int daemon()
     if((pid = fork()) != 0)
     {
         exit(0);
-　　}
-　　
-　　setsid();
-　　
+    }
+
+        setsid();
+
     signal(SIGINT, SIG_IGN);
     signal(SIGHUP, SIG_IGN);
     signal(SIGQUIT, SIG_IGN);
