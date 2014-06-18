@@ -153,8 +153,9 @@ map <silent><unique><leader>j <C-w>j
 map <silent><unique><leader>k <C-w>k
 map <silent><unique><leader>h <C-w>h
 map <silent><unique><leader>l <C-w>l
-map <silent><unique><leader>f <C-f>
-map <silent><unique><leader>b <C-b>
+
+"设置打开最近浏览的文件列表
+nmap <silent><unique><leader>b :bro ol<CR>
 
 "设置svn
 nmap <silent><unique><leader>D :VCSDiff<CR>
@@ -197,6 +198,9 @@ nmap <unique><silent><F8> :Tlist <CR>
 
 "消除每行后面的空格
 map <unique><silent><F3>S :%s/\s\+$//g<CR><CR>
+
+" 设置cnext的map
+nmap <unique><silent><CR> :cn<CR>
 
 "设置taglist窗口布局
 let Tlist_Show_One_File = 1 
@@ -357,3 +361,12 @@ let g:airline_symbols.paste = 'ρ'
 augroup filetype
 	au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
+
+function! g:CD(path)
+	echomsg a:path
+	exec "cd " . a:path
+	"call <SID>:initNerdTree(a:path)
+endfunction
+
+"call g:CD("/data")
+command! -n=1 -complete=dir -bar CD :call g:CD('<args>')
