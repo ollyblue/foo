@@ -2,9 +2,9 @@
 
 
 >**Insert Mode**
->\<CTRL+H\> delete left one char
->\<CTRL+W\> delete left one word
->\<CTRL+U\> delte left insert line
+>&lt;CTRL+H&gt; delete left one char
+>&lt;CTRL+W&gt; delete left one word
+>&lt;CTRL+U&gt; delte left insert line
 
 ---
 
