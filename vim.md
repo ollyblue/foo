@@ -2,9 +2,9 @@
 
 
 > Insert Mode
->><CTRL+H> delete left one char
->><CTRL+W> delete left one word
->><CTRL+U> delte left insert line
+>>\<CTRL+H\> delete left one char
+>>\<CTRL+W\> delete left one word
+>>\<CTRL+U\> delte left insert line
 
 > Visual Mode
 >>gv selete last visual block
