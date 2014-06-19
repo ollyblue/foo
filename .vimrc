@@ -362,11 +362,3 @@ augroup filetype
 	au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
 
-function! g:CD(path)
-	echomsg a:path
-	exec "cd " . a:path
-	"call <SID>:initNerdTree(a:path)
-endfunction
-
-"call g:CD("/data")
-command! -n=1 -complete=dir -bar CD :call g:CD('<args>')
