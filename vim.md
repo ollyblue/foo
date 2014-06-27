@@ -28,3 +28,11 @@
 >:g/pattern/.w >outfile write all match pattern to outfile(outfile must exist)
 
 ---
+
+>**other**
+
+>A&lt;a.vim&gt; switch between header file and implementation
+
+>IH&lt;a.vim&gt; switch to the file under cursor
+
+---
