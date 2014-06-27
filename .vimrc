@@ -362,3 +362,8 @@ augroup filetype
 	au! BufRead,BufNewFile *.proto setfiletype proto
 augroup end
 
+" 添加golang的语法高过 ftdetect
+augroup filetype
+	au! BufRead,BufNewFile *.go set filetype=go
+augroup end
+
