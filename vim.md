@@ -24,3 +24,7 @@
 >vimgrep /patten/ filelist
 
 >/patten/ open grep result in new buffer
+
+>:g/pattern/,w >outfile write all match pattern to outfile(outfile must exist)
+
+---
