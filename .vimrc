@@ -373,3 +373,5 @@ augroup end
 " 最后的宏看起来如下:
 let @z='i1^M^[:sleep 1^M^M^['
 
+
+
