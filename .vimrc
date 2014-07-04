@@ -367,3 +367,9 @@ augroup filetype
 	au! BufRead,BufNewFile *.go set filetype=go
 augroup end
 
+" 在vim的宏中使用定时，比如每1秒钟插入一个数字
+" 具体做法如下： 
+" qa 进入宏记录，按i,然后<ESC> <ESC>两次，最后在输入需要的文字，按j <ESC>恢复 normal模式
+" 最后的宏看起来如下:
+" let @z='i1^M^[:sleep 1^M^M^['
+
